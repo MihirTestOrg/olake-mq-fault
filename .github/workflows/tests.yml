@@ -58,7 +58,7 @@ jobs:
     if: needs.preflight.outputs.drivers != '[]' && needs.preflight.outputs.redundant != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    environment: ${{ github.event_name == 'pull_request' && !(github.head_ref == 'staging' && github.base_ref == 'master') && 'integration_tests' || '' }}
+    environment: ${{ !(github.head_ref == 'staging' && github.base_ref == 'master') && 'integration_tests' || '' }}
     outputs:
       attempt: ${{ github.run_attempt }}
       drivers: ${{ needs.preflight.outputs.drivers }}
